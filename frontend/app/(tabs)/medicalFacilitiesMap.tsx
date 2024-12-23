@@ -30,7 +30,7 @@ export default function MedicalFacilitiesMap() {
                             type: 'Clinic',
                         },
                     ].map((facility, i) => (
-                        <View key={i} className="bg-white p-4 rounded-lg shadow-sm">
+                        <View key={i} className="bg-white p-4 rounded-lg shadow-sm my-1">
                             <Text className="text-gray-900 font-medium">
                                 {facility.name}
                             </Text>

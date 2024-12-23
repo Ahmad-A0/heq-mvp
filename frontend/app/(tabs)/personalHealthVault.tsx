@@ -40,7 +40,7 @@ export default function PersonalHealthVault() {
                             icon: '💉',
                         },
                     ].map((record, i) => (
-                        <View key={i} className="bg-white p-4 rounded-lg shadow-sm flex-row items-center">
+                        <View key={i} className="bg-white p-4 rounded-lg shadow-sm flex-row items-center my-1">
                             <Text className="text-2xl mr-3">{record.icon}</Text>
                             <View>
                                 <Text className="text-gray-900 font-medium">

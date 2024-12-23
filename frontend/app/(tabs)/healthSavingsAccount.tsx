@@ -21,7 +21,7 @@ export default function HealthSavingsAccount() {
                         Recent Transactions
                     </Text>
                     {[1, 2, 3].map((i) => (
-                        <View key={i} className="bg-white p-4 rounded-lg shadow-sm">
+                        <View key={i} className="bg-white p-4 rounded-lg shadow-sm my-1">
                             <Text className="text-gray-900 font-medium">
                                 Medical Checkup
                             </Text>
