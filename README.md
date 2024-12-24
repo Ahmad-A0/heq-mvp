@@ -1,0 +1,2 @@
+- https://www.hl7.org/fhir/overview.html
+- https://www.mongodb.com/library/interoperability/building-fhir-applications-mongodb?lb-mode=overlay
