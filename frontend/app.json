@@ -9,13 +9,15 @@
         "userInterfaceStyle": "automatic",
         "newArchEnabled": true,
         "ios": {
-            "supportsTablet": true
+            "supportsTablet": true,
+            "bundleIdentifier": "com.anonymous.HealthEquityChain"
         },
         "android": {
             "adaptiveIcon": {
                 "foregroundImage": "./assets/images/adaptive-icon.png",
                 "backgroundColor": "#ffffff"
-            }
+            },
+            "package": "com.anonymous.HealthEquityChain"
         },
         "web": {
             "bundler": "metro",
@@ -36,7 +38,13 @@
             [
                 "@rnmapbox/maps",
                 {
-                    "RNMapboxMapsDownloadToken": "sk.ey.."
+                    "RNMapboxMapsDownloadToken": "sk.eyJ1IjoiODgxcmQ3d2MiLCJhIjoiY201MnZ3ZG13MjlkZTJrc2Ywa28zbDNjcCJ9.CaabFQ4TuOT4lowRkWlXiA"
+                }
+            ],
+            [
+                "expo-location",
+                {
+                    "locationWhenInUsePermission": "Show current location on map."
                 }
             ]
         ],
