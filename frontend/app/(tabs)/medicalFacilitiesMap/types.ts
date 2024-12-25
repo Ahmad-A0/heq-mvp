@@ -1,3 +1,10 @@
+export interface Rating {
+  userId: string;
+  rating: number;
+  comment?: string;
+  createdAt: string;
+}
+
 export interface Facility {
   id: string;
   name: string;
@@ -8,6 +15,9 @@ export interface Facility {
   address: string;
   contactPhone: string;
   contactEmail: string;
+  ratings: Rating[];
+  averageRating: number;
+  totalRatings: number;
   availableSlots: {
     date: string;
     slots: {
@@ -41,4 +51,10 @@ export interface BookingDetails {
   serviceId: string;
   patientName: string;
   contactInfo: string;
+}
+
+export interface RatingSubmission {
+  facilityId: string;
+  rating: number;
+  comment?: string;
 }

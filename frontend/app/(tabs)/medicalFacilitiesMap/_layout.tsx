@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
-import { Slot } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import { View } from 'react-native';
 import * as Location from 'expo-location';
 import { Facility, UserLocation, FacilitySearchFilters } from './types';
 import { SAMPLE_FACILITIES } from './constants';
 import { FacilitiesMap } from './components/FacilitiesMap';
-import { PanelContent } from './components/PanelContent';
 import { SlidingPanel, SlidingPanelRef } from './components/SlidingPanel';
+import { FacilityProvider } from './context/FacilityContext';
 
 export default function MFMLayout() {
   const [searchFilters, setSearchFilters] = useState<FacilitySearchFilters>({
@@ -53,17 +53,31 @@ export default function MFMLayout() {
     panelRef.current?.minimize();
   };
 
-  const handleFacilitySelect = (facility: Facility) => {
+  const router = useRouter();
+
+  const handleFacilitySelect = (facility: Facility | null) => {
     setSelectedFacility(facility);
-    setUserLocation({
-      latitude: facility.coordinates[1],
-      longitude: facility.coordinates[0],
-    });
-    panelRef.current?.expand();
+    if (facility) {
+      setUserLocation({
+        latitude: facility.coordinates[1],
+        longitude: facility.coordinates[0],
+      });
+      panelRef.current?.expand();
+      router.push('/medicalFacilitiesMap/facility');
+    }
   };
 
   const handleSearchFocus = () => {
     panelRef.current?.expand();
+  };
+
+  const contextValue = {
+    facilities: filteredFacilities,
+    searchFilters,
+    onSearchFiltersChange: setSearchFilters,
+    onSearchFocus: handleSearchFocus,
+    onFacilitySelect: handleFacilitySelect,
+    selectedFacility
   };
 
   return (
@@ -76,17 +90,23 @@ export default function MFMLayout() {
       />
 
       <SlidingPanel ref={panelRef}>
-        <PanelContent
-          selectedFacility={selectedFacility}
-          facilities={filteredFacilities}
-          searchFilters={searchFilters}
-          onSearchFiltersChange={setSearchFilters}
-          onSearchFocus={handleSearchFocus}
-          onFacilitySelect={handleFacilitySelect}
-        />
+        <FacilityProvider value={contextValue}>
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              animation: 'slide_from_right'
+            }}
+          >
+            <Stack.Screen name="index" />
+            <Stack.Screen 
+              name="facility"
+              options={{
+                animation: 'slide_from_right'
+              }}
+            />
+          </Stack>
+        </FacilityProvider>
       </SlidingPanel>
-
-      <Slot />
     </View>
   );
 }

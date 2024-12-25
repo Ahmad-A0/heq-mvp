@@ -23,7 +23,7 @@ export function SearchFilters({ filters, onFiltersChange, onFocus }: SearchFilte
 
   return (
     <View className="mb-4">
-      <View className="flex-row items-stretch gap-2 mb-2">
+      <View className="flex-row items-stretch gap-2 my-2">
         <View className="flex-1">
           <SearchBar
             value={filters.query}

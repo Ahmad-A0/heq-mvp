@@ -27,6 +27,22 @@ export const SAMPLE_FACILITIES: Facility[] = [
     address: '123 Healthcare Ave, San Francisco, CA 94103',
     contactPhone: '(415) 555-0123',
     contactEmail: 'appointments@citygeneral.com',
+    ratings: [
+      {
+        userId: 'user1',
+        rating: 4,
+        comment: 'Great service and professional staff',
+        createdAt: '2024-02-19T10:00:00Z'
+      },
+      {
+        userId: 'user2',
+        rating: 5,
+        comment: 'Excellent facilities and care',
+        createdAt: '2024-02-18T15:30:00Z'
+      }
+    ],
+    averageRating: 4.5,
+    totalRatings: 2,
     availableSlots: [
       {
         date: '2024-02-20',
@@ -74,6 +90,16 @@ export const SAMPLE_FACILITIES: Facility[] = [
     address: '456 Medical Plaza, San Francisco, CA 94102',
     contactPhone: '(415) 555-0456',
     contactEmail: 'care@downtownmed.com',
+    ratings: [
+      {
+        userId: 'user3',
+        rating: 5,
+        comment: 'Modern facilities and caring doctors',
+        createdAt: '2024-02-17T09:15:00Z'
+      }
+    ],
+    averageRating: 5,
+    totalRatings: 1,
     availableSlots: [
       {
         date: '2024-02-20',
@@ -119,6 +145,22 @@ export const SAMPLE_FACILITIES: Facility[] = [
     address: '789 Community Lane, San Francisco, CA 94109',
     contactPhone: '(415) 555-0789',
     contactEmail: 'info@communityclinic.com',
+    ratings: [
+      {
+        userId: 'user4',
+        rating: 4,
+        comment: 'Friendly staff and reasonable prices',
+        createdAt: '2024-02-16T14:20:00Z'
+      },
+      {
+        userId: 'user5',
+        rating: 3,
+        comment: 'Good service but long wait times',
+        createdAt: '2024-02-15T16:45:00Z'
+      }
+    ],
+    averageRating: 3.5,
+    totalRatings: 2,
     availableSlots: [
       {
         date: '2024-02-20',

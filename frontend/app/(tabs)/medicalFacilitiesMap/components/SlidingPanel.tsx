@@ -1,5 +1,5 @@
 import { forwardRef, useRef, useImperativeHandle } from 'react';
-import { View, Animated, PanResponder } from 'react-native';
+import { View, Animated, PanResponder, KeyboardAvoidingView, Platform } from 'react-native';
 import { SCREEN_HEIGHT, PANEL_MIN_HEIGHT, PANEL_MAX_HEIGHT } from '../constants';
 
 interface SlidingPanelProps {
@@ -92,7 +92,13 @@ export const SlidingPanel = forwardRef<SlidingPanelRef, SlidingPanelProps>(
         <View className="items-center pt-2 pb-4">
           <View className="w-10 h-1 rounded-full bg-gray-300" />
         </View>
-        {children}
+        {/* <KeyboardAvoidingView 
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={{ flex: 1 }}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+        > */}
+          {children}
+        {/* </KeyboardAvoidingView> */}
       </Animated.View>
     );
   }

@@ -9,10 +9,10 @@ interface SearchBarProps {
 
 export function SearchBar({ value, onChangeText, onFocus }: SearchBarProps) {
   return (
-    <View className="flex-row items-center bg-gray-100 rounded-lg p-2">
-      <Search size={20} className="text-gray-400 mx-2" />
+    <View className="flex-row items-center bg-white rounded-lg p-2 shadow-sm">
+      <Search size={20} className="text-gray-400" />
       <TextInput
-        className="flex-1 text-base text-gray-800"
+        className="flex-1 text-base text-gray-800 mx-2"
         placeholder="Search medical facilities..."
         value={value}
         onChangeText={onChangeText}
