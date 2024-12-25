@@ -7,7 +7,7 @@ import Mapbox, {
     PointAnnotation,
 } from '@rnmapbox/maps';
 import * as Location from 'expo-location';
-import { MapPin } from 'lucide-react-native';
+import { MapPin, Locate} from 'lucide-react-native';
 import { Facility, UserLocation } from '../types';
 import { MAPBOX_ACCESS_TOKEN, PANEL_MAX_HEIGHT, PANEL_MIN_HEIGHT } from '../constants';
 
@@ -45,7 +45,7 @@ export function FacilitiesMap({
                 style={{ flex: 1 }}
                 logoEnabled={false}
                 compassEnabled={false}
-                scaleBarEnabled
+                scaleBarEnabled={true}
                 onPress={onMapPress}
             >
                 {userLocation && (
@@ -82,22 +82,10 @@ export function FacilitiesMap({
             </MapView>
 
             <TouchableOpacity
-                style={{
-                    position: 'absolute',
-                    bottom: PANEL_MIN_HEIGHT,
-                    right: 16,
-                    backgroundColor: 'white',
-                    borderRadius: 9999,
-                    padding: 12,
-                    shadowColor: '#000',
-                    shadowOffset: { width: 0, height: 2 },
-                    shadowOpacity: 0.25,
-                    shadowRadius: 3.84,
-                    elevation: 5,
-                }}
+                className='absolute top-0 right-0 m-4 p-4 bg-white rounded-full shadow-md'
                 onPress={handleLocationPress}
             >
-                <MapPin size={24} color="#3B82F6" />
+                <Locate size={24} color="#3B82F6" />
             </TouchableOpacity>
         </View>
     );

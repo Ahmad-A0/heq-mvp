@@ -99,6 +99,33 @@ export default function FacilityDetailsScreen() {
         </View>
 
         <View className="bg-white rounded-lg shadow-sm p-4 mb-4">
+          <Text className="text-lg font-semibold mb-3">Opening Hours</Text>
+          {selectedFacility.openingHours.map((schedule, index) => (
+            <View
+              key={index}
+              className="flex-row justify-between items-center mb-2 last:mb-0"
+            >
+              <Text className="text-gray-800 font-medium">{schedule.day}</Text>
+              <Text className="text-gray-600">{schedule.hours}</Text>
+            </View>
+          ))}
+        </View>
+
+        <View className="bg-white rounded-lg shadow-sm p-4 mb-4">
+          <Text className="text-lg font-semibold mb-3">Specialties & Services</Text>
+          <View className="flex-row flex-wrap">
+            {selectedFacility.tags.map((tag, index) => (
+              <View
+                key={index}
+                className="bg-blue-100 rounded-lg px-3 py-1 mr-2 mb-2"
+              >
+                <Text className="text-blue-500">{tag}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        <View className="bg-white rounded-lg shadow-sm p-4 mb-4">
           <Text className="text-lg font-semibold mb-3">Available Services</Text>
           {selectedFacility.services.map((service) => (
             <View

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, Modal, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Facility, BookingDetails } from '../types';
+import { BaseModal } from '../../../util/BaseModal';
 
 interface BookingModalProps {
   facility: Facility;
@@ -44,7 +45,6 @@ export function BookingModal({ facility, visible, onClose, onSubmit }: BookingMo
       case 1:
         return (
           <View className="p-4">
-            <Text className="text-xl font-semibold mb-4">Select Date</Text>
             <ScrollView className="max-h-64">
               {facility.availableSlots.map((slot) => (
                 <TouchableOpacity
@@ -70,7 +70,6 @@ export function BookingModal({ facility, visible, onClose, onSubmit }: BookingMo
 
         return (
           <View className="p-4">
-            <Text className="text-xl font-semibold mb-4">Select Time</Text>
             <ScrollView className="max-h-64">
               {dateSlots.map((slot) => (
                 <TouchableOpacity
@@ -98,7 +97,6 @@ export function BookingModal({ facility, visible, onClose, onSubmit }: BookingMo
       case 3:
         return (
           <View className="p-4">
-            <Text className="text-xl font-semibold mb-4">Select Service</Text>
             <ScrollView className="max-h-64">
               {facility.services.map((service) => (
                 <TouchableOpacity
@@ -126,7 +124,6 @@ export function BookingModal({ facility, visible, onClose, onSubmit }: BookingMo
       case 4:
         return (
           <View className="p-4">
-            <Text className="text-xl font-semibold mb-4">Confirm Booking</Text>
             <View className="bg-gray-50 p-4 rounded-lg mb-4">
               <Text className="text-lg mb-2">
                 {facility.name}
@@ -149,52 +146,44 @@ export function BookingModal({ facility, visible, onClose, onSubmit }: BookingMo
     }
   };
 
+  const stepTitles = {
+    1: 'Select Date',
+    2: 'Select Time',
+    3: 'Select Service',
+    4: 'Confirm Booking'
+  };
+
   return (
-    <Modal
+    <BaseModal
       visible={visible}
-      animationType="slide"
-      transparent={true}
-      onRequestClose={onClose}
+      onClose={onClose}
+      title={`Book Appointment - ${stepTitles[step as keyof typeof stepTitles]}`}
     >
-      <View className="flex-1 justify-end">
-        <View className="bg-white rounded-t-3xl">
-          <View className="flex-row justify-between items-center p-4 border-b border-gray-200">
-            <Text className="text-xl font-semibold">
-              Book Appointment - Step {step}/4
-            </Text>
-            <TouchableOpacity onPress={onClose}>
-              <Text className="text-blue-500 text-lg">Close</Text>
-            </TouchableOpacity>
-          </View>
-
-          {renderStep()}
-
-          <View className="flex-row justify-between p-4 border-t border-gray-200">
-            {step > 1 && (
-              <TouchableOpacity
-                className="px-6 py-3 bg-gray-200 rounded-lg"
-                onPress={() => setStep(step - 1)}
-              >
-                <Text className="text-gray-800">Back</Text>
-              </TouchableOpacity>
-            )}
-            <TouchableOpacity
-              className="px-6 py-3 bg-blue-500 rounded-lg ml-auto"
-              onPress={() => {
-                if (step < 4) {
-                  setStep(step + 1);
-                } else {
-                  handleSubmit();
-                }
-              }}
-            >
-              <Text className="text-white">
-                {step === 4 ? 'Confirm Booking' : 'Next'}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+      {renderStep()}
+      <View className="flex-row justify-between p-4 border-t border-gray-200">
+        {step > 1 && (
+          <TouchableOpacity
+            className="px-6 py-3 bg-gray-200 rounded-lg"
+            onPress={() => setStep(step - 1)}
+          >
+            <Text className="text-gray-800">Back</Text>
+          </TouchableOpacity>
+        )}
+        <TouchableOpacity
+          className="px-6 py-3 bg-blue-500 rounded-lg ml-auto"
+          onPress={() => {
+            if (step < 4) {
+              setStep(step + 1);
+            } else {
+              handleSubmit();
+            }
+          }}
+        >
+          <Text className="text-white">
+            {step === 4 ? 'Confirm Booking' : 'Next'}
+          </Text>
+        </TouchableOpacity>
       </View>
-    </Modal>
+    </BaseModal>
   );
 }

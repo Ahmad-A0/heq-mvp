@@ -18,6 +18,11 @@ export interface Facility {
   ratings: Rating[];
   averageRating: number;
   totalRatings: number;
+  openingHours: {
+    day: string;
+    hours: string;
+  }[];
+  tags: string[];
   availableSlots: {
     date: string;
     slots: {

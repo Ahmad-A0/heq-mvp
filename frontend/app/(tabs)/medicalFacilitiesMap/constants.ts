@@ -27,6 +27,12 @@ export const SAMPLE_FACILITIES: Facility[] = [
     address: '123 Healthcare Ave, San Francisco, CA 94103',
     contactPhone: '(415) 555-0123',
     contactEmail: 'appointments@citygeneral.com',
+    openingHours: [
+      { day: 'Monday-Friday', hours: '7:00 AM - 9:00 PM' },
+      { day: 'Saturday', hours: '8:00 AM - 6:00 PM' },
+      { day: 'Sunday', hours: '9:00 AM - 5:00 PM' }
+    ],
+    tags: ['Emergency Care', '24/7 ICU', 'Surgery', 'Pediatrics', 'Cardiology'],
     ratings: [
       {
         userId: 'user1',
@@ -90,6 +96,12 @@ export const SAMPLE_FACILITIES: Facility[] = [
     address: '456 Medical Plaza, San Francisco, CA 94102',
     contactPhone: '(415) 555-0456',
     contactEmail: 'care@downtownmed.com',
+    openingHours: [
+      { day: 'Monday-Friday', hours: '8:00 AM - 8:00 PM' },
+      { day: 'Saturday', hours: '9:00 AM - 5:00 PM' },
+      { day: 'Sunday', hours: 'Closed' }
+    ],
+    tags: ['Primary Care', 'Urgent Care', 'Family Medicine', 'Lab Services'],
     ratings: [
       {
         userId: 'user3',
@@ -145,6 +157,12 @@ export const SAMPLE_FACILITIES: Facility[] = [
     address: '789 Community Lane, San Francisco, CA 94109',
     contactPhone: '(415) 555-0789',
     contactEmail: 'info@communityclinic.com',
+    openingHours: [
+      { day: 'Monday-Thursday', hours: '9:00 AM - 6:00 PM' },
+      { day: 'Friday', hours: '9:00 AM - 5:00 PM' },
+      { day: 'Saturday-Sunday', hours: 'Closed' }
+    ],
+    tags: ['Community Care', 'Vaccinations', 'Preventive Care', 'Affordable Care'],
     ratings: [
       {
         userId: 'user4',
