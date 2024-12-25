@@ -71,7 +71,6 @@ export const SlidingPanel = forwardRef<SlidingPanelRef, SlidingPanelProps>(
 
     return (
       <Animated.View
-        {...panResponder.panHandlers}
         style={{
           position: 'absolute',
           bottom: 0,
@@ -89,16 +88,29 @@ export const SlidingPanel = forwardRef<SlidingPanelRef, SlidingPanelProps>(
           zIndex: 1,
         }}
       >
-        <View className="items-center pt-2 pb-4">
+        {/* Drag Handle - Only attach panResponder here */}
+        <View
+          {...panResponder.panHandlers}
+          className="items-center pt-2 pb-4"
+        >
           <View className="w-10 h-1 rounded-full bg-gray-300" />
         </View>
-        {/* <KeyboardAvoidingView 
+
+        {/* Scrollable Content Area */}
+        <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={{ flex: 1 }}
           keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
-        > */}
-          {children}
-        {/* </KeyboardAvoidingView> */}
+        >
+          <View
+            style={{
+              flex: 1,
+              overflow: 'hidden'
+            }}
+          >
+            {children}
+          </View>
+        </KeyboardAvoidingView>
       </Animated.View>
     );
   }

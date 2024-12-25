@@ -5,6 +5,8 @@ import {
     TouchableOpacity,
     TextInput,
     ScrollView,
+    KeyboardAvoidingView,
+    Platform,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useSession } from '../context/ctx';
@@ -214,7 +216,9 @@ export default function Signup() {
 
             <View className="mb-4">
                 <View className="mb-4">
-                    <Text className="text-gray-700 mb-2">Insurance Provider</Text>
+                    <Text className="text-gray-700 mb-2">
+                        Insurance Provider
+                    </Text>
                     <View className="h-12 px-4 border border-gray-300 rounded-lg justify-center">
                         <TextInput
                             className="flex-1"
@@ -258,7 +262,9 @@ export default function Signup() {
                         </View>
 
                         <View className="mb-4">
-                            <Text className="text-gray-700 mb-2">Relationship</Text>
+                            <Text className="text-gray-700 mb-2">
+                                Relationship
+                            </Text>
                             <View className="h-12 px-4 border border-gray-300 rounded-lg justify-center">
                                 <TextInput
                                     className="flex-1"
@@ -271,7 +277,9 @@ export default function Signup() {
                         </View>
 
                         <View className="mb-4">
-                            <Text className="text-gray-700 mb-2">Phone Number</Text>
+                            <Text className="text-gray-700 mb-2">
+                                Phone Number
+                            </Text>
                             <View className="h-12 px-4 border border-gray-300 rounded-lg justify-center">
                                 <TextInput
                                     className="flex-1"
@@ -296,7 +304,8 @@ export default function Signup() {
                     Verify Identity
                 </Text>
                 <Text className="text-center text-gray-500 mb-2">
-                    We need to verify your identity to comply with healthcare regulations
+                    We need to verify your identity to comply with healthcare
+                    regulations
                 </Text>
             </View>
 
@@ -305,7 +314,9 @@ export default function Signup() {
                     <Text className="text-gray-700 mb-2">Government ID</Text>
                     <TouchableOpacity
                         className={`h-32 border-2 border-dashed rounded-lg items-center justify-center ${
-                            idUploaded ? 'border-green-500 bg-green-50' : 'border-gray-300'
+                            idUploaded
+                                ? 'border-green-500 bg-green-50'
+                                : 'border-gray-300'
                         }`}
                         onPress={() => setIdUploaded(true)}
                     >
@@ -327,7 +338,9 @@ export default function Signup() {
                     <Text className="text-gray-700 mb-2">Proof of Address</Text>
                     <TouchableOpacity
                         className={`h-32 border-2 border-dashed rounded-lg items-center justify-center ${
-                            addressUploaded ? 'border-green-500 bg-green-50' : 'border-gray-300'
+                            addressUploaded
+                                ? 'border-green-500 bg-green-50'
+                                : 'border-gray-300'
                         }`}
                         onPress={() => setAddressUploaded(true)}
                     >
@@ -385,10 +398,19 @@ export default function Signup() {
         }
     };
 
-    return (
-        <ScrollView className="flex-1 bg-white">
-            <View className="min-h-screen justify-center p-6">
-                <View className="w-full max-w-sm mx-auto mb-8">
+    return <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        className="flex-1 bg-white"
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
+    >
+        <ScrollView
+            className="flex-1"
+            contentContainerStyle={{ flexGrow: 1 }}
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
+        >
+            <View className="flex-1 px-6 justify-center">
+                <View className="w-full max-w-sm mx-auto">
                     {renderCurrentStep()}
 
                     <TouchableOpacity
@@ -400,7 +422,9 @@ export default function Signup() {
                     >
                         <Text
                             className={`font-semibold ${
-                                isNextDisabled() ? 'text-gray-500' : 'text-white'
+                                isNextDisabled()
+                                    ? 'text-gray-500'
+                                    : 'text-white'
                             }`}
                         >
                             {getButtonText()}
@@ -451,5 +475,5 @@ export default function Signup() {
                 </View>
             </View>
         </ScrollView>
-    );
+    </KeyboardAvoidingView>;
 }

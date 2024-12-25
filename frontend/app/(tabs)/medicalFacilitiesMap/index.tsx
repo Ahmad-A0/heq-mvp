@@ -76,7 +76,7 @@ export default function FacilityListScreen() {
                         <View className="flex-row items-center mb-2">
                             {/* <Building size={16} className="text-gray-600" /> */}
                             <Text className="text-gray-600 text-sm mr-1 ml-0">
-                                {facility.type} - 
+                                {facility.type} -
                             </Text>
                             <Text className="text-blue-600">
                                 {facility.distance} away
@@ -110,6 +110,8 @@ export default function FacilityListScreen() {
                         </View>
                     </TouchableOpacity>
                 ))}
+
+                <View className="my-2"></View>
             </View>
         </ScrollView>
     );

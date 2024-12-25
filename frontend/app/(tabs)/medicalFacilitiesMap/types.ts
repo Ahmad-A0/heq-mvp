@@ -10,6 +10,7 @@ export interface Facility {
   name: string;
   coordinates: [number, number];
   type: string;
+  levelOfCare: string;
   distance: string;
   emoji: string;
   address: string;
@@ -35,6 +36,30 @@ export interface Facility {
     name: string;
     duration: number;
     price: number;
+  }[];
+  doctors?: {
+    id: string;
+    name: string;
+    specialty: string;
+    available: boolean;
+  }[];
+  specialists?: {
+    id: string;
+    name: string;
+    specialty: string;
+    available: boolean;
+  }[];
+  diagnosticTests?: {
+    id: string;
+    name: string;
+    price: number;
+    turnaroundTime: string;
+  }[];
+  medications?: {
+    id: string;
+    name: string;
+    price: number;
+    inStock: boolean;
   }[];
 }
 
