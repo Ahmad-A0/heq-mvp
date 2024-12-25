@@ -13,8 +13,9 @@ install! 'cocoapods',
 
 prepare_react_native_project!
 
-# @generated begin @rnmapbox/maps-rnmapboxmapsimpl - expo prebuild (DO NOT MODIFY) sync-8fa1dc7765dc2c64f3b4adc00dff1edc612bf634
-$RNMapboxMapsDownloadToken = 'sk.ey..'
+# @generated begin @rnmapbox/maps-rnmapboxmapsimpl - expo prebuild (DO NOT MODIFY) sync-a93f0f07775be0fc3ae23fbbffcd8f077d60249c
+$RNMapboxMapsDownloadToken = 'sk.eyJ1IjoiODgxcmQ3d2MiLCJhIjoiY201MnZ3ZG13MjlkZTJrc2Ywa28zbDNjcCJ9.CaabFQ4TuOT4lowRkWlXiA'
+$RNMapboxMapsVersion = '11.0.0'
 # @generated end @rnmapbox/maps-rnmapboxmapsimpl
 target 'HealthEquityChain' do
   use_expo_modules!

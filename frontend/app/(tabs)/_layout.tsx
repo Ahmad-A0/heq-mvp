@@ -1,8 +1,8 @@
 import { Tabs } from 'expo-router';
-import { BlurView } from 'expo-blur';
 import { PiggyBank, MapPin, Lock, Vault } from 'lucide-react-native';
-import { StyleSheet } from 'react-native';
+import { Text } from 'react-native';
 import tw from 'twrnc';
+import Icon from '../util/Icon';
 
 export default function TabLayout() {
     return (
@@ -21,7 +21,7 @@ export default function TabLayout() {
                 tabBarLabelStyle: tw`text-xs font-medium`,
                 tabBarItemStyle: tw`mx-2`,
                 headerShown: false,
-                animation: "shift"
+                animation: 'shift',
             }}
             initialRouteName="healthSavingsAccount"
         >
@@ -33,7 +33,9 @@ export default function TabLayout() {
                         <Vault
                             size={24}
                             color={color}
-                            style={tw`${focused ? 'opacity-100' : 'opacity-70'}`}
+                            style={tw`${
+                                focused ? 'opacity-100' : 'opacity-70'
+                            }`}
                         />
                     ),
                 }}
@@ -46,7 +48,9 @@ export default function TabLayout() {
                         <PiggyBank
                             size={24}
                             color={color}
-                            style={tw`${focused ? 'opacity-100' : 'opacity-70'}`}
+                            style={tw`${
+                                focused ? 'opacity-100' : 'opacity-70'
+                            }`}
                         />
                     ),
                 }}
@@ -59,7 +63,9 @@ export default function TabLayout() {
                         <MapPin
                             size={24}
                             color={color}
-                            style={tw`${focused ? 'opacity-100' : 'opacity-70'}`}
+                            style={tw`${
+                                focused ? 'opacity-100' : 'opacity-70'
+                            }`}
                         />
                     ),
                 }}
