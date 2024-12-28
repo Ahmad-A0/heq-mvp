@@ -22,9 +22,10 @@ export function BaseModal({
       animationType="slide"
       transparent={true}
       onRequestClose={onClose}
+      className=''
     >
       <View className="flex-1 justify-end">
-        <View className={`bg-white rounded-t-3xl ${maxHeight}`}>
+        <View className={`bg-white rounded-t-3xl ${maxHeight} border-t-2 border-x-2 border-blue-400`}>
           <View className="flex-row justify-between items-center p-4 border-b border-gray-200">
             {typeof title === 'string' ? (
               <Text className="text-lg font-semibold">{title}</Text>

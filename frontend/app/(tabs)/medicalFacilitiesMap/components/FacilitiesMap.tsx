@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import React, { useState } from 'react'; import { View, TouchableOpacity, Text } from 'react-native';
+import { SearchFilters } from './SearchFilters';
+import { useFacility } from '../context/FacilityContext';
 import Mapbox, {
     MapView,
     Camera,
@@ -7,9 +8,13 @@ import Mapbox, {
     PointAnnotation,
 } from '@rnmapbox/maps';
 import * as Location from 'expo-location';
-import { MapPin, Locate} from 'lucide-react-native';
+import { MapPin, Locate } from 'lucide-react-native';
 import { Facility, UserLocation } from '../types';
-import { MAPBOX_ACCESS_TOKEN, PANEL_MAX_HEIGHT, PANEL_MIN_HEIGHT } from '../constants';
+import {
+    MAPBOX_ACCESS_TOKEN,
+    PANEL_MAX_HEIGHT,
+    PANEL_MIN_HEIGHT,
+} from '../constants';
 
 interface FacilitiesMapProps {
     userLocation: UserLocation | null;
@@ -39,13 +44,22 @@ export function FacilitiesMap({
         }
     };
 
+    const { searchFilters, onSearchFiltersChange } = useFacility();
+
     return (
         <View style={{ flex: 1 }}>
+            <View className="absolute top-0 left-0 right-0 z-50 px-4 pt-2">
+                <SearchFilters
+                    filters={searchFilters}
+                    onFiltersChange={onSearchFiltersChange}
+                    onFocus={() => null}
+                />
+            </View>
             <MapView
                 style={{ flex: 1 }}
                 logoEnabled={false}
                 compassEnabled={false}
-                scaleBarEnabled={true}
+                scaleBarEnabled={false}
                 onPress={onMapPress}
             >
                 {userLocation && (
@@ -82,7 +96,7 @@ export function FacilitiesMap({
             </MapView>
 
             <TouchableOpacity
-                className='absolute top-0 right-0 m-4 p-4 bg-white rounded-full shadow-md'
+                className="absolute top-14 right-0 m-3 p-3 bg-white rounded-full shadow-md"
                 onPress={handleLocationPress}
             >
                 <Locate size={24} color="#3B82F6" />

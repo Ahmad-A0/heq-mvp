@@ -12,7 +12,6 @@ export default function FacilityListScreen() {
         facilities,
         searchFilters,
         onSearchFiltersChange,
-        onSearchFocus,
         onFacilitySelect,
     } = useFacility();
     const router = useRouter();
@@ -34,14 +33,9 @@ export default function FacilityListScreen() {
                 paddingBottom: TAB_BAR_HEIGHT,
             }}
         >
-            <SearchFilters
-                filters={searchFilters}
-                onFiltersChange={onSearchFiltersChange}
-                onFocus={onSearchFocus}
-            />
 
             <View>
-                <Text className="text-lg font-semibold text-gray-900 mb-4">
+                <Text className="text-lg font-semibold text-gray-900 my-4">
                     Nearby Medical Facilities
                 </Text>
                 {facilities.map((facility) => (

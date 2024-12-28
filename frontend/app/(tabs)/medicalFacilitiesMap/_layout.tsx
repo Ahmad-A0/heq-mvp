@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Stack, useRouter } from 'expo-router';
 import { View } from 'react-native';
 import * as Location from 'expo-location';
-import { Facility, UserLocation, FacilitySearchFilters } from './types';
+import { Facility, UserLocation, FacilitySearchFilters, RatingSubmission } from './types';
 import { SAMPLE_FACILITIES } from './constants';
 import { FacilitiesMap } from './components/FacilitiesMap';
 import { SlidingPanel, SlidingPanelRef } from './components/SlidingPanel';
@@ -71,30 +71,31 @@ export default function MFMLayout() {
         }
     };
 
-    const handleSearchFocus = () => {
-        panelRef.current?.expand();
+    const handleRatingSubmit = (rating: RatingSubmission) => {
+        console.log('Rating submitted:', rating);
+        // TODO: Implement actual rating submission
     };
 
     const contextValue = {
         facilities: filteredFacilities,
         searchFilters,
         onSearchFiltersChange: setSearchFilters,
-        onSearchFocus: handleSearchFocus,
         onFacilitySelect: handleFacilitySelect,
         selectedFacility,
+        onRatingSubmit: handleRatingSubmit,
     };
 
     return (
         <View style={{ flex: 1 }}>
-            <FacilitiesMap
-                userLocation={userLocation}
-                facilities={filteredFacilities}
-                onMapPress={handleMapPress}
-                onFacilitySelect={handleFacilitySelect}
-            />
+            <FacilityProvider value={contextValue}>
+                <FacilitiesMap
+                    userLocation={userLocation}
+                    facilities={filteredFacilities}
+                    onMapPress={handleMapPress}
+                    onFacilitySelect={handleFacilitySelect}
+                />
 
-            <SlidingPanel ref={panelRef}>
-                <FacilityProvider value={contextValue}>
+                <SlidingPanel ref={panelRef}>
                     <Stack
                         screenOptions={{
                             headerShown: false,
@@ -111,8 +112,8 @@ export default function MFMLayout() {
                             }}
                         />
                     </Stack>
-                </FacilityProvider>
-            </SlidingPanel>
+                </SlidingPanel>
+            </FacilityProvider>
         </View>
     );
 }

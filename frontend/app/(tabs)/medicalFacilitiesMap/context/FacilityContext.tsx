@@ -5,7 +5,6 @@ interface FacilityContextType {
   facilities: Facility[];
   searchFilters: FacilitySearchFilters;
   onSearchFiltersChange: (filters: FacilitySearchFilters) => void;
-  onSearchFocus: () => void;
   onFacilitySelect: (facility: Facility | null) => void;
   selectedFacility: Facility | null;
   onRatingSubmit: (rating: RatingSubmission) => void;
