@@ -1,4 +1,10 @@
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    ScrollView,
+    Linking,
+} from 'react-native';
 import {
     Phone,
     Mail,
@@ -8,7 +14,7 @@ import {
     ChevronRight,
 } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { BookingDetails } from './types';
 import { BookingModal } from './components/BookingModal';
 import { RatingModal } from './components/RatingModal';
@@ -16,6 +22,7 @@ import { ReviewsModal } from './components/ReviewsModal';
 import { StarRating } from './components/StarRating';
 import { TAB_BAR_HEIGHT } from './constants';
 import { useFacility } from './context/FacilityContext';
+import { copyToClipboard } from '@/app/util/utils';
 
 export default function FacilityDetailsScreen() {
     const router = useRouter();
@@ -101,7 +108,17 @@ export default function FacilityDetailsScreen() {
                         </TouchableOpacity>
                     </View>
 
-                    <View className="flex-row items-center mb-3">
+                    <TouchableOpacity
+                        className="flex-row items-center mb-3"
+                        onPress={() =>
+                            Linking.openURL(
+                                `geo:${selectedFacility.coordinates[0]},${selectedFacility.coordinates[1]}(${selectedFacility.name})`
+                            )
+                        }
+                        onLongPress={() =>
+                            copyToClipboard(selectedFacility.address)
+                        }
+                    >
                         <MapPin size={20} className="text-gray-600 mr-2" />
                         <Text className="text-gray-800 flex-1 ml-2">
                             {selectedFacility.address}
@@ -109,16 +126,36 @@ export default function FacilityDetailsScreen() {
                         <Text className="text-blue-600 ml-2">
                             {selectedFacility.distance} away
                         </Text>
-                    </View>
+                    </TouchableOpacity>
 
-                    <TouchableOpacity className="flex-row items-center mb-3">
+                    <TouchableOpacity
+                        className="flex-row items-center mb-3"
+                        onPress={() =>
+                            Linking.openURL(
+                                `tel:${selectedFacility.contactPhone}`
+                            )
+                        }
+                        onLongPress={() =>
+                            copyToClipboard(selectedFacility.contactPhone)
+                        }
+                    >
                         <Phone size={20} className="text-gray-600 mr-2" />
                         <Text className="text-blue-600 ml-2">
                             {selectedFacility.contactPhone}
                         </Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity className="flex-row items-center">
+                    <TouchableOpacity
+                        className="flex-row items-center"
+                        onPress={() =>
+                            Linking.openURL(
+                                `mailto:${selectedFacility.contactEmail}`
+                            )
+                        }
+                        onLongPress={() =>
+                            copyToClipboard(selectedFacility.contactEmail)
+                        }
+                    >
                         <Mail size={20} className="text-gray-600 mr-2" />
                         <Text className="text-blue-600 ml-2">
                             {selectedFacility.contactEmail}
@@ -179,14 +216,26 @@ export default function FacilityDetailsScreen() {
                     ))}
                 </View>
 
-                <View className="bg-white rounded-lg shadow-sm p-4 mb-4">
-                    <Text className="text-lg font-semibold mb-3">
-                        Level of Care
-                    </Text>
-                    <Text className="text-gray-800">
-                        {selectedFacility.levelOfCare}
-                    </Text>
-                </View>
+                {selectedFacility.kenya ? (
+                    <>
+                        <View className="bg-white rounded-lg shadow-sm p-4 mb-4">
+                            <Text className="text-lg font-semibold mb-3">
+                                Level of Care
+                            </Text>
+                            <Text className="text-gray-800 font-bold">
+                                {selectedFacility.kenya.levelOfCare} - {selectedFacility.kenya.shaServiceCategories}
+                            </Text>
+                        </View>
+                        <View className="bg-white rounded-lg shadow-sm p-4 mb-4">
+                            <Text className="text-lg font-semibold mb-3">
+                                Accepts SHIF
+                            </Text>
+                            <Text className="text-gray-800">
+                                {selectedFacility.kenya.acceptsSHIF ? "Yes" : "No"}
+                            </Text>
+                        </View>
+                    </>
+                ) : null}
 
                 {selectedFacility.doctors &&
                     selectedFacility.doctors.length > 0 && (
@@ -319,7 +368,6 @@ export default function FacilityDetailsScreen() {
                             ))}
                         </View>
                     )}
-
 
                 <View className="bg-white rounded-lg shadow-sm p-4 mb-4">
                     <Text className="text-lg font-semibold mb-3">

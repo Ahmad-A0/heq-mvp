@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import AuthMethodPicker from '../util/AuthMethodPicker';
 import {
     Text,
     View,
@@ -24,7 +25,7 @@ export default function Signup() {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [verificationCode, setVerificationCode] = useState('');
     const [isVerified, setIsVerified] = useState(false);
-    const [useEmail, setUseEmail] = useState(false);
+    const [usePhone, setUsePhone] = useState(true);
 
     // Basic Info
     const [firstName, setFirstName] = useState('');
@@ -46,17 +47,17 @@ export default function Signup() {
     const [addressUploaded, setAddressUploaded] = useState(false);
 
     const handleSendVerification = async () => {
-        if (useEmail && !email) {
+        if (usePhone && !email) {
             alert('Please enter your email address');
             return;
         }
-        if (!useEmail && !phoneNumber) {
+        if (!usePhone && !phoneNumber) {
             alert('Please enter your phone number');
             return;
         }
         
         // TODO: Implement verification code sending
-        console.log('Verification code sent to', useEmail ? email : phoneNumber);
+        console.log('Verification code sent to', usePhone ? email : phoneNumber);
     };
 
     const handleVerifyCode = async () => {
@@ -68,7 +69,7 @@ export default function Signup() {
         // TODO: Implement verification code validation
         setIsVerified(true);
         setCurrentStep('basic');
-        console.log(useEmail ? 'Email' : 'Phone number', 'verified');
+        console.log(usePhone ? 'Email' : 'Phone number', 'verified');
     };
 
     const handleNext = () => {
@@ -93,8 +94,8 @@ export default function Signup() {
                 signUp({
                     firstName,
                     lastName,
-                    email: useEmail ? email : undefined,
-                    phone: !useEmail ? phoneNumber : undefined,
+                    email: email,
+                    phone: phoneNumber, //* One of these two should be undefined
                     dateOfBirth,
                     insuranceProvider,
                     insuranceNumber,
@@ -104,7 +105,7 @@ export default function Signup() {
                         phone: emergencyPhone,
                     },
                 });
-                router.replace('/(tabs)/healthSavingsAccount');
+                router.replace('/healthSavingsAccount');
                 break;
         }
     };
@@ -133,39 +134,29 @@ export default function Signup() {
         <>
             <View className="mb-4">
                 <Text className="text-3xl font-bold text-center text-gray-900 mb-2">
-                    Verify Your {useEmail ? 'Email' : 'Phone'}
+                    Verify Your {usePhone ? 'Phone' : 'Email'}
                 </Text>
                 <Text className="text-center text-gray-500 mb-2">
-                    We'll send a verification code to your {useEmail ? 'email' : 'phone'}
+                    We'll send a verification code to your {usePhone ? 'phone' : 'email'}
                 </Text>
             </View>
 
             <View className="mb-4">
-                <View className="flex-row justify-center mb-4">
-                    <TouchableOpacity
-                        className={`px-4 py-2 rounded-l-lg ${
-                            useEmail ? 'bg-blue-600' : 'bg-gray-200'
-                        }`}
-                        onPress={() => setUseEmail(true)}
-                    >
-                        <Text className={`font-medium ${
-                            useEmail ? 'text-white' : 'text-gray-700'
-                        }`}>Email</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        className={`px-4 py-2 rounded-r-lg ${
-                            !useEmail ? 'bg-blue-600' : 'bg-gray-200'
-                        }`}
-                        onPress={() => setUseEmail(false)}
-                    >
-                        <Text className={`font-medium ${
-                            !useEmail ? 'text-white' : 'text-gray-700'
-                        }`}>Phone</Text>
-                    </TouchableOpacity>
-                </View>
+                <AuthMethodPicker
+                    usePhone={usePhone}
+                    setUsePhone={setUsePhone}
+                />
 
                 <View className="mb-4">
-                    {useEmail ? (
+                    {usePhone ? (
+                        <>
+                            <Text className="text-gray-700 mb-2">Phone Number</Text>
+                            <PhoneNumberInput
+                                value={phoneNumber}
+                                onChange={setPhoneNumber}
+                            />
+                        </>
+                    ) : (
                         <>
                             <Text className="text-gray-700 mb-2">Email Address</Text>
                             <View className="h-12 px-4 border border-gray-300 rounded-lg justify-center">
@@ -179,14 +170,6 @@ export default function Signup() {
                                     autoCapitalize="none"
                                 />
                             </View>
-                        </>
-                    ) : (
-                        <>
-                            <Text className="text-gray-700 mb-2">Phone Number</Text>
-                            <PhoneNumberInput
-                                value={phoneNumber}
-                                onChange={setPhoneNumber}
-                            />
                         </>
                     )}
                     <TouchableOpacity

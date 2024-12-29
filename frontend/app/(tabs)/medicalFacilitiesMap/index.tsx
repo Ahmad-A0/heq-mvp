@@ -1,4 +1,10 @@
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    ScrollView,
+    Linking,
+} from 'react-native';
 import { MapPin, Clock, Building } from 'lucide-react-native';
 import { useRouter } from 'expo-router';
 import { SearchFilters } from './components/SearchFilters';
@@ -33,7 +39,6 @@ export default function FacilityListScreen() {
                 paddingBottom: TAB_BAR_HEIGHT,
             }}
         >
-
             <View>
                 <Text className="text-lg font-semibold text-gray-900 my-4">
                     Nearby Medical Facilities

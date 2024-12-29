@@ -1,7 +1,8 @@
+import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import AuthMethodPicker from '../util/AuthMethodPicker';
 import { useRouter } from 'expo-router';
 import { useSession } from '../context/ctx';
-import { useState } from 'react';
 import '../../global.css';
 import PhoneNumberInput from '../util/PhoneNumberInput';
 
@@ -11,7 +12,7 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [password, setPassword] = useState('');
-    const [useEmail, setUseEmail] = useState(false);
+    const [usePhone, setUsePhone] = useState(true);
 
     return (
         <View className="flex-1 justify-center items-center bg-white p-6">
@@ -26,33 +27,27 @@ export default function Login() {
                 </View>
 
                 <View className="mb-8">
-                    <View className="flex-row justify-center mb-4">
-                        <TouchableOpacity
-                            className={`px-4 py-2 rounded-l-lg ${
-                                useEmail ? 'bg-blue-600' : 'bg-gray-200'
-                            }`}
-                            onPress={() => setUseEmail(true)}
-                        >
-                            <Text className={`font-medium ${
-                                useEmail ? 'text-white' : 'text-gray-700'
-                            }`}>Email</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            className={`px-4 py-2 rounded-r-lg ${
-                                !useEmail ? 'bg-blue-600' : 'bg-gray-200'
-                            }`}
-                            onPress={() => setUseEmail(false)}
-                        >
-                            <Text className={`font-medium ${
-                                !useEmail ? 'text-white' : 'text-gray-700'
-                            }`}>Phone</Text>
-                        </TouchableOpacity>
-                    </View>
+                    <AuthMethodPicker
+                        usePhone={usePhone}
+                        setUsePhone={setUsePhone}
+                    />
 
                     <View className="mb-4">
-                        {useEmail ? (
+                        {usePhone ? (
                             <>
-                                <Text className="text-gray-700 mb-2">Email Address</Text>
+                                <Text className="text-gray-700 mb-2">
+                                    Phone Number
+                                </Text>
+                                <PhoneNumberInput
+                                    value={phoneNumber}
+                                    onChange={setPhoneNumber}
+                                />
+                            </>
+                        ) : (
+                            <>
+                                <Text className="text-gray-700 mb-2">
+                                    Email Address
+                                </Text>
                                 <View className="h-12 px-4 border border-gray-300 rounded-lg justify-center">
                                     <TextInput
                                         className="flex-1"
@@ -64,14 +59,6 @@ export default function Login() {
                                         autoCapitalize="none"
                                     />
                                 </View>
-                            </>
-                        ) : (
-                            <>
-                                <Text className="text-gray-700 mb-2">Phone Number</Text>
-                                <PhoneNumberInput
-                                    value={phoneNumber}
-                                    onChange={setPhoneNumber}
-                                />
                             </>
                         )}
                     </View>
@@ -94,7 +81,7 @@ export default function Login() {
                 <TouchableOpacity
                     className="h-12 bg-blue-600 rounded-lg items-center justify-center mb-8"
                     onPress={() => {
-                        signIn(useEmail ? email : phoneNumber, password);
+                        signIn(usePhone ? email : phoneNumber, password);
                         router.replace(
                             '/(tabs)/healthSavingsAccount' as string
                         );
