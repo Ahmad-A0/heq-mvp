@@ -1,6 +1,9 @@
 import { View, Text, ScrollView } from 'react-native';
 
 export default function HealthSavingsAccount() {
+    const isUganda = true;
+    const currency = !isUganda ? "KSh" : "USh"
+
     return (
         <ScrollView className="flex-1 bg-gray-50">
             <View className="p-6 my-6">
@@ -12,7 +15,7 @@ export default function HealthSavingsAccount() {
                         Current Balance
                     </Text>
                     <Text className="text-3xl font-bold text-blue-600 mt-2">
-                        $2,450.00
+                        {currency} 2,450.00
                     </Text>
                 </View>
 
@@ -29,7 +32,7 @@ export default function HealthSavingsAccount() {
                                 Dec {i}, 2024
                             </Text>
                             <Text className="text-blue-600 font-medium mt-2">
-                                -$120.00
+                                -{currency} 120.00
                             </Text>
                         </View>
                     ))}

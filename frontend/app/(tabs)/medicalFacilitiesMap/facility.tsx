@@ -47,6 +47,8 @@ export default function FacilityDetailsScreen() {
         console.log('Booking details:', bookingDetails);
     };
 
+    const currency = selectedFacility.kenya ? "KSh" : "USh"
+
     return (
         <ScrollView
             className="flex-1"
@@ -58,7 +60,7 @@ export default function FacilityDetailsScreen() {
         >
             <TouchableOpacity
                 onPress={handleBack}
-                className="flex-row items-center py-4"
+                className="flex-row items-center py-4 mt-1"
             >
                 <ArrowLeft size={24} className="text-blue-500" />
                 <Text className="text-blue-500 text-lg ml-3">Back</Text>
@@ -210,7 +212,7 @@ export default function FacilityDetailsScreen() {
                                 </Text>
                             </View>
                             <Text className="text-gray-800">
-                                ${service.price}
+                                {currency} {service.price}
                             </Text>
                         </View>
                     ))}
@@ -223,11 +225,11 @@ export default function FacilityDetailsScreen() {
                                 Level of Care
                             </Text>
                             <Text className="text-gray-800 font-bold">
-                                {selectedFacility.kenya.levelOfCare} - {selectedFacility.kenya.shaServiceCategories}
+                                {`${selectedFacility.kenya.levelOfCare} - ${selectedFacility.kenya.shaServiceCategories.join(", ")}`}
                             </Text>
                         </View>
                         <View className="bg-white rounded-lg shadow-sm p-4 mb-4">
-                            <Text className="text-lg font-semibold mb-3">
+                            <Text className="text-lg font-semibold my-3">
                                 Accepts SHIF
                             </Text>
                             <Text className="text-gray-800">
@@ -327,7 +329,7 @@ export default function FacilityDetailsScreen() {
                                         </Text>
                                     </View>
                                     <Text className="text-gray-800">
-                                        ${test.price}
+                                        {currency} {test.price}
                                     </Text>
                                 </View>
                             ))}

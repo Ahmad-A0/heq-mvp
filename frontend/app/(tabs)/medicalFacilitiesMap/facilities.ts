@@ -1228,4 +1228,181 @@ export const UGANDA_FACILITIES: Facility[] = [
             },
         ],
     },
+    {
+        "id": "adyel-health-centre-ii",
+        "name": "Adyel Health Centre II",
+        "coordinates": [
+            32.8836530,
+            2.2670493
+        ],
+        "type": "Clinic",
+        "distance": "2 km",
+        "emoji": "🏥",
+        "address": "Adyel, Gulu, Uganda",
+        "contactPhone": "+256 777 123 456",
+        "contactEmail": "adyelclinic@example.com",
+        "ratings": [
+            {
+                "userId": "user1",
+                "rating": 4,
+                "comment": "Good service, always available.",
+                "createdAt": "2024-02-28T08:00:00Z"
+            },
+            {
+                "userId": "user2",
+                "rating": 5,
+                "comment": "Very helpful staff and clean facilities.",
+                "createdAt": "2024-02-28T10:00:00Z"
+            }
+        ],
+        "averageRating": 4.5,
+        "totalRatings": 2,
+        "openingHours": [
+            {
+                "day": "Monday-Sunday",
+                "hours": "24/7"
+            }
+        ],
+        "tags": [
+            "Public",
+            "Primary Care",
+            "Emergency"
+        ],
+        "availableSlots": [
+            {
+                "date": "2024-03-05",
+                "slots": [
+                    {
+                        "time": "09:00",
+                        "available": true
+                    },
+                    {
+                        "time": "10:00",
+                        "available": true
+                    },
+                    {
+                        "time": "11:00",
+                        "available": true
+                    },
+                    {
+                        "time": "14:00",
+                        "available": true
+                    },
+                    {
+                        "time": "15:00",
+                        "available": true
+                    }
+                ]
+            },
+            {
+                "date": "2024-03-06",
+                "slots": [
+                     {
+                        "time": "09:00",
+                        "available": true
+                    },
+                    {
+                        "time": "10:00",
+                        "available": true
+                    },
+                    {
+                        "time": "11:00",
+                        "available": true
+                    },
+                    {
+                        "time": "14:00",
+                        "available": true
+                    },
+                    {
+                        "time": "15:00",
+                        "available": true
+                    }
+                ]
+            }
+        ],
+        "services": [
+            {
+                "id": "physical-consultation",
+                "name": "Physical Consultation",
+                "duration": 30,
+                "price": 5000
+            },
+            {
+                "id": "telemedical-consultation",
+                "name": "Telemedical Consultation",
+                "duration": 20,
+                "price": 3000
+            },
+            {
+                "id": "mobile-clinic-consultation",
+                "name": "Mobile Clinic Consultation",
+                "duration": 45,
+                "price": 7000
+            },
+            {
+                "id": "malaria-treatment",
+                "name": "Malaria Treatment",
+                "duration": 60,
+                "price": 1000
+            }
+        ],
+        "doctors": [
+            {
+                "id": "doc1",
+                "name": "Dr. Jane Doe",
+                "specialty": "General Physician",
+                "available": true
+            },
+            {
+                "id": "doc2",
+                "name": "Dr. John Smith",
+                "specialty": "Obstetrics",
+                "available": true
+            }
+        ],
+        "specialists": [
+            {
+                "id": "spec1",
+                "name": "Nurse Mary",
+                "specialty": "Family Planning",
+                "available": true
+            }
+        ],
+        "diagnosticTests": [
+            {
+                "id": "test1",
+                "name": "Malaria Test",
+                "price": 1500,
+                "turnaroundTime": "30 minutes"
+            },
+            {
+                "id": "test2",
+                "name": "Blood Test",
+                "price": 2000,
+                "turnaroundTime": "1 hour"
+            }
+        ],
+        "medications": [
+            {
+                "id": "med1",
+                "name": "Paracetamol",
+                "price": 500,
+                "inStock": true
+            },
+            {
+                "id": "med2",
+                "name": "Anti-Malarials",
+                "price": 1000,
+                "inStock": true
+            }
+        ]
+        // "kenya": {
+        //     "levelOfCare": 3,
+        //     "shaServiceCategories": [
+        //         "Preventive and Promotive",
+        //         "Curative"
+        //     ],
+        //     "acceptsSHIF": false
+        // }
+    }
 ];

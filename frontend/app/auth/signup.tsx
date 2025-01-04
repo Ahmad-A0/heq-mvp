@@ -47,12 +47,12 @@ export default function Signup() {
     const [addressUploaded, setAddressUploaded] = useState(false);
 
     const handleSendVerification = async () => {
-        if (usePhone && !email) {
-            alert('Please enter your email address');
+        if (usePhone && !phoneNumber) {
+            alert('Please enter your phone number');
             return;
         }
-        if (!usePhone && !phoneNumber) {
-            alert('Please enter your phone number');
+        if (!usePhone && !email) {
+            alert('Please enter your email address');
             return;
         }
         
