@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Stack, useRouter } from 'expo-router';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 import * as Location from 'expo-location';
 import { Facility, UserLocation, FacilitySearchFilters, RatingSubmission } from './types';
 import { SAMPLE_FACILITIES } from './constants';
@@ -76,6 +76,12 @@ export default function MFMLayout() {
         // TODO: Implement actual rating submission
     };
 
+    const showNotification = (message: string) => {
+        // For now, use Alert as a simple notification mechanism
+        Alert.alert('Weather Notification', message);
+        console.log('Notification:', message);
+    };
+
     const contextValue = {
         facilities: filteredFacilities,
         searchFilters,
@@ -83,6 +89,7 @@ export default function MFMLayout() {
         onFacilitySelect: handleFacilitySelect,
         selectedFacility,
         onRatingSubmit: handleRatingSubmit,
+        showNotification,
     };
 
     return (

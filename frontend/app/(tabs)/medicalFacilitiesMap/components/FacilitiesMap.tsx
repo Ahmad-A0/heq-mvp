@@ -1,6 +1,8 @@
-import React, { useState } from 'react'; import { View, TouchableOpacity, Text } from 'react-native';
+import React, { useState } from 'react';
+import { View, TouchableOpacity, Text } from 'react-native';
 import { SearchFilters } from './SearchFilters';
 import { useFacility } from '../context/FacilityContext';
+import { WeatherWidget } from './WeatherWidget';
 import Mapbox, {
     MapView,
     Camera,
@@ -32,6 +34,7 @@ export function FacilitiesMap({
     onFacilitySelect,
 }: FacilitiesMapProps) {
     const [animateToLocation, setAnimateToLocation] = useState(false);
+    const [region, setRegion] = useState<UserLocation | null>(userLocation);
 
     const handleLocationPress = async () => {
         if (userLocation) {
@@ -44,23 +47,26 @@ export function FacilitiesMap({
         }
     };
 
+    const handleRegionChange = (newRegion: any) => {
+        console.log('New region:', newRegion);
+        if (userLocation) {
+            userLocation.latitude = newRegion.geometry.coordinates[1];
+            userLocation.longitude = newRegion.geometry.coordinates[0];
+            setRegion(userLocation);
+        }
+    };
+
     const { searchFilters, onSearchFiltersChange } = useFacility();
 
     return (
         <View style={{ flex: 1 }}>
-            <View className="absolute top-0 left-0 right-0 z-50 px-4 pt-2">
-                <SearchFilters
-                    filters={searchFilters}
-                    onFiltersChange={onSearchFiltersChange}
-                    onFocus={() => null}
-                />
-            </View>
             <MapView
                 style={{ flex: 1 }}
                 logoEnabled={false}
                 compassEnabled={false}
                 scaleBarEnabled={false}
                 onPress={onMapPress}
+                onRegionDidChange={handleRegionChange}
             >
                 {userLocation && (
                     <>
@@ -95,12 +101,24 @@ export function FacilitiesMap({
                 ))}
             </MapView>
 
-            <TouchableOpacity
-                className="absolute top-14 right-0 m-3 p-3 bg-white rounded-full shadow-md"
-                onPress={handleLocationPress}
-            >
-                <Locate size={24} color="#3B82F6" />
-            </TouchableOpacity>
+            <View className="absolute top-0 w-full flex flex-col items-end">
+                <View className="w-full px-4 z-50">
+                    <SearchFilters
+                        filters={searchFilters}
+                        onFiltersChange={onSearchFiltersChange}
+                        onFocus={() => null}
+                    />
+                </View>
+
+                <WeatherWidget userLocation={userLocation} className='mx-3 mt-2' />
+
+                <TouchableOpacity
+                    className="mx-3 my-2 p-3 bg-white rounded-full shadow-md"
+                    onPress={handleLocationPress}
+                >
+                    <Locate size={24} color="#3B82F6" />
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
