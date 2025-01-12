@@ -1,59 +1,72 @@
-import { View, Text, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { ArrowLeft } from 'lucide-react-native';
+import { currentUser } from './constants';
+import Dashboard from './components/Dashboard';
+import HealthRecords from './components/HealthRecords';
+import DataSharing from './components/DataSharing';
+import RecordImport from './components/RecordImport';
+
+type Screen = 'dashboard' | 'records' | 'sharing' | 'import' | 'settings';
+
+interface ScreenConfig {
+    title: string;
+    component: React.ReactNode;
+}
 
 export default function PersonalHealthVault() {
-    return (
-        <ScrollView className="flex-1 bg-gray-50">
-            <View className="p-6 my-6">
-                <View className="bg-white rounded-xl p-6 shadow-sm">
-                    <Text className="text-2xl font-bold text-gray-900">
-                        Personal Health Vault
-                    </Text>
-                    <Text className="text-gray-500 mt-1">
-                        Your secure health information storage
-                    </Text>
-                </View>
+    const [activeScreen, setActiveScreen] = useState<Screen>('dashboard');
 
-                <View className="my-4">
-                    <Text className="text-xl font-semibold text-gray-900">
-                        Health Records
+    const screens: Record<Screen, ScreenConfig> = {
+        dashboard: {
+            title: 'Personal Health Vault',
+            component: <Dashboard user={currentUser} onNavigate={setActiveScreen} />
+        },
+        records: {
+            title: 'Health Records',
+            component: <HealthRecords user={currentUser} />
+        },
+        sharing: {
+            title: 'Data Sharing',
+            component: <DataSharing user={currentUser} />
+        },
+        import: {
+            title: 'Import Records',
+            component: <RecordImport user={currentUser} />
+        },
+        settings: {
+            title: 'Settings',
+            component: <Dashboard user={currentUser} onNavigate={setActiveScreen} />
+        }
+    };
+
+    const currentScreen = screens[activeScreen];
+
+    return (
+        <View className="flex-1 bg-gray-50">
+            {/* Header */}
+            <View className="bg-white shadow-sm">
+                <View className="flex-row items-center p-4">
+                    {activeScreen !== 'dashboard' && (
+                        <TouchableOpacity
+                            onPress={() => setActiveScreen('dashboard')}
+                            className="mr-3"
+                        >
+                            <ArrowLeft size={24} color="#4B5563" />
+                        </TouchableOpacity>
+                    )}
+                    <Text className="text-xl font-bold text-gray-900">
+                        {currentScreen.title}
                     </Text>
-                    
-                    {[
-                        {
-                            title: 'Medical History',
-                            date: 'Last updated Dec 1, 2023',
-                            icon: '📋',
-                        },
-                        {
-                            title: 'Prescriptions',
-                            date: 'Last updated Dec 5, 2023',
-                            icon: '💊',
-                        },
-                        {
-                            title: 'Lab Results',
-                            date: 'Last updated Dec 10, 2023',
-                            icon: '🔬',
-                        },
-                        {
-                            title: 'Immunizations',
-                            date: 'Last updated Nov 28, 2023',
-                            icon: '💉',
-                        },
-                    ].map((record, i) => (
-                        <View key={i} className="bg-white p-4 rounded-lg shadow-sm flex-row items-center my-1">
-                            <Text className="text-2xl mr-3">{record.icon}</Text>
-                            <View>
-                                <Text className="text-gray-900 font-medium">
-                                    {record.title}
-                                </Text>
-                                <Text className="text-gray-500 text-sm mt-1">
-                                    {record.date}
-                                </Text>
-                            </View>
-                        </View>
-                    ))}
                 </View>
             </View>
-        </ScrollView>
+
+            {/* Content Area */}
+            <View className="flex-1">
+                {currentScreen.component}
+            </View>
+
+            <View className='my-8' />
+        </View>
     );
 }

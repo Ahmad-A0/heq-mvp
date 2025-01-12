@@ -83,7 +83,7 @@ export default function Login() {
                     onPress={() => {
                         signIn(usePhone ? email : phoneNumber, password);
                         router.replace(
-                            '/(tabs)/healthSavingsAccount' as string
+                            '/(tabs)/personalHealthVault' as string
                         );
                     }}
                 >

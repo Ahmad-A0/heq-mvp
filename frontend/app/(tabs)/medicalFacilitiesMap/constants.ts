@@ -1,6 +1,6 @@
 import { Dimensions, Platform } from 'react-native';
 import { Facility } from './types';
-import { KENYA_FACILITIES, UGANDA_FACILITIES } from './facilities';
+import { ADDITIONAL_1, KENYA_FACILITIES, UGANDA_FACILITIES } from './facilities';
 
 export const SCREEN_HEIGHT = Dimensions.get('window').height;
 export const TAB_BAR_HEIGHT = Platform.OS === 'ios' ? 85 : 65;
@@ -23,4 +23,5 @@ export const FACILITY_TYPES = [
 export const SAMPLE_FACILITIES: Facility[] = [
     ...KENYA_FACILITIES,
     ...UGANDA_FACILITIES,
+    ...ADDITIONAL_1
 ];

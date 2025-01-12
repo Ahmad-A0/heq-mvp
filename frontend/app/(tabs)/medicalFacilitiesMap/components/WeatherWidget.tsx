@@ -17,7 +17,7 @@ interface WeatherData {
     condition: string;
     humidity: number;
     windSpeed: number;
-    alert?: string;
+    alerts?: string[];
 }
 
 interface WeatherWidgetProps {
@@ -43,20 +43,32 @@ export function WeatherWidget({ userLocation, className }: WeatherWidgetProps) {
             const data = await response.json();
             console.info(data);
 
+            const feelsLike = Math.round(data.main.feels_like);
             const weatherData: WeatherData = {
                 temp: Math.round(data.main.temp),
-                feelsLike: Math.round(data.main.feels_like),
+                feelsLike: feelsLike,
                 condition: data.weather[0].main,
                 humidity: data.main.humidity,
                 windSpeed: data.wind.speed,
+                alerts: [],
             };
 
+            // Set weather condition alerts
             if (data.weather[0].id >= 200 && data.weather[0].id < 800) {
-                weatherData.alert = data.weather[0].description;
+                weatherData.alerts?.push(data.weather[0].description);
                 setAlertVisible(true);
-            } else {
-                setAlertVisible(false);
-                weatherData.alert = undefined;
+            }
+
+            // Set temperature alerts based on feels_like temperature
+            if (feelsLike >= 25 && feelsLike <= 32) {
+                weatherData.alerts?.push('Awareness - Possible fatigue with prolonged exposure to heat');
+                setAlertVisible(true);
+            } else if (feelsLike > 32 && feelsLike <= 39) {
+                weatherData.alerts?.push('Caution - Heat cramps and heat exhaustion possible');
+                setAlertVisible(true);
+            } else if (feelsLike > 39) {
+                weatherData.alerts?.push('Extreme Caution - Heatstroke possible with prolonged exposure to heat');
+                setAlertVisible(true);
             }
 
             setWeather(weatherData);
@@ -107,7 +119,7 @@ export function WeatherWidget({ userLocation, className }: WeatherWidgetProps) {
     return (
         <TouchableOpacity
             className={className}
-            onPress={() => alertVisible && alert(weather?.alert)}
+            onPress={() => alertVisible && alert(weather?.alerts?.join('\n'))}
         >
             {weather && (
                 <View className="bg-white rounded-lg p-3 shadow-md flex-row items-center">

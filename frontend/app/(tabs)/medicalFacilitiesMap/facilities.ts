@@ -10,6 +10,81 @@ export const FACILITY_TYPES = [
     'Health Centre',
 ];
 
+const example_ratings = (
+    number: number
+): {
+    userId: string;
+    rating: number;
+    comment: string;
+    createdAt: string;
+}[] => {
+    const examples = [
+        {
+            userId: 'user1',
+            rating: 4,
+            comment: 'Conveniently located and provides basic services.',
+            createdAt: '2024-02-16T14:20:00Z',
+        },
+        {
+            userId: 'user2',
+            rating: 3,
+            comment: 'Limited services but helpful staff.',
+            createdAt: '2024-02-17T15:00:00Z',
+        },
+        {
+            userId: 'user3',
+            rating: 5,
+            comment: 'Clean and efficient services, great for emergencies.',
+            createdAt: '2024-02-18T10:00:00Z',
+        },
+
+        {
+            userId: 'user4',
+            rating: 5,
+            comment: 'Professional staff and comprehensive services.',
+            createdAt: '2024-02-17T15:30:00Z',
+        },
+        {
+            userId: 'user5',
+            rating: 4,
+            comment: 'Friendly staff and quick services.',
+            createdAt: '2024-02-18T12:00:00Z',
+        },
+        {
+            userId: 'user6',
+            rating: 4,
+            comment: 'State-of-the-art equipment and clean facilities.',
+            createdAt: '2024-02-19T11:00:00Z',
+        },
+
+        {
+            userId: 'user19',
+            rating: 4,
+            comment: 'Convenient for day services and friendly staff.',
+            createdAt: '2024-02-25T09:00:00Z',
+        },
+        {
+            userId: 'user20',
+            rating: 4,
+            comment: 'Clean facilities and affordable services.',
+            createdAt: '2024-02-26T11:00:00Z',
+        },
+        {
+            userId: 'user21',
+            rating: 4,
+            comment: 'Professional doctors and comprehensive care.',
+            createdAt: '2024-02-27T12:00:00Z',
+        },
+    ];
+    const ret = [];
+    for (let i = 0; i < number; i++) {
+        const index = Math.floor(Math.random() * examples.length);
+        ret.push(examples[index]);
+        examples.splice(index, 1);
+    }
+    return ret;
+};
+
 export const KENYA_FACILITIES: Facility[] = [
     {
         id: 'kibera-hospital',
@@ -91,26 +166,7 @@ export const KENYA_FACILITIES: Facility[] = [
             'Family Planning',
             'Youth Services',
         ],
-        ratings: [
-            {
-                userId: 'user4',
-                rating: 5,
-                comment: 'Professional staff and comprehensive services.',
-                createdAt: '2024-02-17T15:30:00Z',
-            },
-            {
-                userId: 'user5',
-                rating: 4,
-                comment: 'Friendly staff and quick services.',
-                createdAt: '2024-02-18T12:00:00Z',
-            },
-            {
-                userId: 'user6',
-                rating: 4,
-                comment: 'State-of-the-art equipment and clean facilities.',
-                createdAt: '2024-02-19T11:00:00Z',
-            },
-        ],
+        ratings: example_ratings(3),
         averageRating: 4.33,
         totalRatings: 3,
         availableSlots: [
@@ -235,26 +291,7 @@ export const KENYA_FACILITIES: Facility[] = [
             { day: 'Saturday', hours: '08:00 - 16:00' },
         ],
         tags: ['Coastal Region', 'Comprehensive Care', 'Community Health'],
-        ratings: [
-            {
-                userId: 'user10',
-                rating: 4,
-                comment: 'Good range of services and friendly staff.',
-                createdAt: '2024-02-18T12:00:00Z',
-            },
-            {
-                userId: 'user11',
-                rating: 4,
-                comment: 'Clean facilities and professional doctors.',
-                createdAt: '2024-02-19T10:00:00Z',
-            },
-            {
-                userId: 'user12',
-                rating: 4,
-                comment: 'Convenient location and affordable services.',
-                createdAt: '2024-02-20T11:00:00Z',
-            },
-        ],
+        ratings: example_ratings(3),
         averageRating: 4,
         totalRatings: 3,
         availableSlots: [
@@ -299,26 +336,7 @@ export const KENYA_FACILITIES: Facility[] = [
         contactEmail: 'dgpeterspharmacy@example.com',
         openingHours: [{ day: 'Monday-Friday', hours: '07:00 - 19:00' }],
         tags: ['Private', 'Primary Care'],
-        ratings: [
-            {
-                userId: 'user19',
-                rating: 4,
-                comment: 'Convenient for day services and friendly staff.',
-                createdAt: '2024-02-25T09:00:00Z',
-            },
-            {
-                userId: 'user20',
-                rating: 4,
-                comment: 'Clean facilities and affordable services.',
-                createdAt: '2024-02-26T11:00:00Z',
-            },
-            {
-                userId: 'user21',
-                rating: 4,
-                comment: 'Professional doctors and comprehensive care.',
-                createdAt: '2024-02-27T12:00:00Z',
-            },
-        ],
+        ratings: [],
         averageRating: 4,
         totalRatings: 3,
         availableSlots: [
@@ -379,26 +397,7 @@ export const KENYA_FACILITIES: Facility[] = [
             { day: 'Friday', hours: '08:00 - 15:00' },
         ],
         tags: ['Private', 'Outpatient Services'],
-        ratings: [
-            {
-                userId: 'user22',
-                rating: 3,
-                comment: 'Limited services but convenient location.',
-                createdAt: '2024-02-28T10:00:00Z',
-            },
-            {
-                userId: 'user23',
-                rating: 3,
-                comment: 'Friendly staff but facilities can be improved.',
-                createdAt: '2024-02-29T11:00:00Z',
-            },
-            {
-                userId: 'user24',
-                rating: 3,
-                comment: 'Clean facilities and professional doctors.',
-                createdAt: '2024-03-01T12:00:00Z',
-            },
-        ],
+        ratings: example_ratings(3),
         averageRating: 3,
         totalRatings: 3,
         availableSlots: [
@@ -1229,180 +1228,898 @@ export const UGANDA_FACILITIES: Facility[] = [
         ],
     },
     {
-        "id": "adyel-health-centre-ii",
-        "name": "Adyel Health Centre II",
-        "coordinates": [
-            32.8836530,
-            2.2670493
-        ],
-        "type": "Clinic",
-        "distance": "2 km",
-        "emoji": "🏥",
-        "address": "Adyel, Gulu, Uganda",
-        "contactPhone": "+256 777 123 456",
-        "contactEmail": "adyelclinic@example.com",
-        "ratings": [
+        id: 'adyel-health-centre-ii',
+        name: 'Adyel Health Centre II',
+        coordinates: [32.883653, 2.2670493],
+        type: 'Clinic',
+        distance: '2 km',
+        emoji: '🏥',
+        address: 'Adyel, Gulu, Uganda',
+        contactPhone: '+256 777 123 456',
+        contactEmail: 'adyelclinic@example.com',
+        ratings: [
             {
-                "userId": "user1",
-                "rating": 4,
-                "comment": "Good service, always available.",
-                "createdAt": "2024-02-28T08:00:00Z"
+                userId: 'user1',
+                rating: 4,
+                comment: 'Good service, always available.',
+                createdAt: '2024-02-28T08:00:00Z',
             },
             {
-                "userId": "user2",
-                "rating": 5,
-                "comment": "Very helpful staff and clean facilities.",
-                "createdAt": "2024-02-28T10:00:00Z"
-            }
+                userId: 'user2',
+                rating: 5,
+                comment: 'Very helpful staff and clean facilities.',
+                createdAt: '2024-02-28T10:00:00Z',
+            },
         ],
-        "averageRating": 4.5,
-        "totalRatings": 2,
-        "openingHours": [
+        averageRating: 4.5,
+        totalRatings: 2,
+        openingHours: [
             {
-                "day": "Monday-Sunday",
-                "hours": "24/7"
-            }
+                day: 'Monday-Sunday',
+                hours: '24/7',
+            },
         ],
-        "tags": [
-            "Public",
-            "Primary Care",
-            "Emergency"
-        ],
-        "availableSlots": [
+        tags: ['Public', 'Primary Care', 'Emergency'],
+        availableSlots: [
             {
-                "date": "2024-03-05",
-                "slots": [
+                date: '2024-03-05',
+                slots: [
                     {
-                        "time": "09:00",
-                        "available": true
+                        time: '09:00',
+                        available: true,
                     },
                     {
-                        "time": "10:00",
-                        "available": true
+                        time: '10:00',
+                        available: true,
                     },
                     {
-                        "time": "11:00",
-                        "available": true
+                        time: '11:00',
+                        available: true,
                     },
                     {
-                        "time": "14:00",
-                        "available": true
+                        time: '14:00',
+                        available: true,
                     },
                     {
-                        "time": "15:00",
-                        "available": true
-                    }
-                ]
+                        time: '15:00',
+                        available: true,
+                    },
+                ],
             },
             {
-                "date": "2024-03-06",
-                "slots": [
-                     {
-                        "time": "09:00",
-                        "available": true
+                date: '2024-03-06',
+                slots: [
+                    {
+                        time: '09:00',
+                        available: true,
                     },
                     {
-                        "time": "10:00",
-                        "available": true
+                        time: '10:00',
+                        available: true,
                     },
                     {
-                        "time": "11:00",
-                        "available": true
+                        time: '11:00',
+                        available: true,
                     },
                     {
-                        "time": "14:00",
-                        "available": true
+                        time: '14:00',
+                        available: true,
                     },
                     {
-                        "time": "15:00",
-                        "available": true
-                    }
-                ]
-            }
+                        time: '15:00',
+                        available: true,
+                    },
+                ],
+            },
         ],
-        "services": [
+        services: [
             {
-                "id": "physical-consultation",
-                "name": "Physical Consultation",
-                "duration": 30,
-                "price": 5000
+                id: 'physical-consultation',
+                name: 'Physical Consultation',
+                duration: 30,
+                price: 5000,
             },
             {
-                "id": "telemedical-consultation",
-                "name": "Telemedical Consultation",
-                "duration": 20,
-                "price": 3000
+                id: 'telemedical-consultation',
+                name: 'Telemedical Consultation',
+                duration: 20,
+                price: 3000,
             },
             {
-                "id": "mobile-clinic-consultation",
-                "name": "Mobile Clinic Consultation",
-                "duration": 45,
-                "price": 7000
+                id: 'mobile-clinic-consultation',
+                name: 'Mobile Clinic Consultation',
+                duration: 45,
+                price: 7000,
             },
             {
-                "id": "malaria-treatment",
-                "name": "Malaria Treatment",
-                "duration": 60,
-                "price": 1000
-            }
+                id: 'malaria-treatment',
+                name: 'Malaria Treatment',
+                duration: 60,
+                price: 1000,
+            },
         ],
-        "doctors": [
+        doctors: [
             {
-                "id": "doc1",
-                "name": "Dr. Jane Doe",
-                "specialty": "General Physician",
-                "available": true
+                id: 'doc1',
+                name: 'Dr. Jane Doe',
+                specialty: 'General Physician',
+                available: true,
             },
             {
-                "id": "doc2",
-                "name": "Dr. John Smith",
-                "specialty": "Obstetrics",
-                "available": true
-            }
+                id: 'doc2',
+                name: 'Dr. John Smith',
+                specialty: 'Obstetrics',
+                available: true,
+            },
         ],
-        "specialists": [
+        specialists: [
             {
-                "id": "spec1",
-                "name": "Nurse Mary",
-                "specialty": "Family Planning",
-                "available": true
-            }
+                id: 'spec1',
+                name: 'Nurse Mary',
+                specialty: 'Family Planning',
+                available: true,
+            },
         ],
-        "diagnosticTests": [
+        diagnosticTests: [
             {
-                "id": "test1",
-                "name": "Malaria Test",
-                "price": 1500,
-                "turnaroundTime": "30 minutes"
+                id: 'test1',
+                name: 'Malaria Test',
+                price: 1500,
+                turnaroundTime: '30 minutes',
             },
             {
-                "id": "test2",
-                "name": "Blood Test",
-                "price": 2000,
-                "turnaroundTime": "1 hour"
-            }
+                id: 'test2',
+                name: 'Blood Test',
+                price: 2000,
+                turnaroundTime: '1 hour',
+            },
         ],
-        "medications": [
+        medications: [
             {
-                "id": "med1",
-                "name": "Paracetamol",
-                "price": 500,
-                "inStock": true
+                id: 'med1',
+                name: 'Paracetamol',
+                price: 500,
+                inStock: true,
             },
             {
-                "id": "med2",
-                "name": "Anti-Malarials",
-                "price": 1000,
-                "inStock": true
-            }
-        ]
-        // "kenya": {
-        //     "levelOfCare": 3,
-        //     "shaServiceCategories": [
-        //         "Preventive and Promotive",
-        //         "Curative"
-        //     ],
-        //     "acceptsSHIF": false
-        // }
-    }
+                id: 'med2',
+                name: 'Anti-Malarials',
+                price: 1000,
+                inStock: true,
+            },
+        ],
+    },
 ];
+
+export const ADDITIONAL_1: Facility[] = [
+  {
+    "id": "5639737538",
+    "name": "Alleluia Clinic",
+    "coordinates": [
+      30.783745,
+      1.187835
+    ],
+    "type": "pharmacy",
+    "distance": "10 km",
+    "emoji": "🏥",
+    "address": "Block 29, Kyangwali, Hoima",
+    "contactPhone": "0123456789",
+    "contactEmail": "alleluiaclinic@example.com",
+    "ratings": [
+      {
+        "userId": "user1",
+        "rating": 5,
+        "comment": "Excellent service",
+        "createdAt": "2022-01-01T00:00:00.000Z"
+      },
+      {
+        "userId": "user2",
+        "rating": 4,
+        "comment": "Good experience",
+        "createdAt": "2022-01-15T00:00:00.000Z"
+      }
+    ],
+    "averageRating": 4.5,
+    "totalRatings": 2,
+    "openingHours": [
+      {
+        "day": "Monday",
+        "hours": "07:00-20:00"
+      },
+      {
+        "day": "Tuesday",
+        "hours": "07:00-20:00"
+      },
+      {
+        "day": "Wednesday",
+        "hours": "07:00-20:00"
+      },
+      {
+        "day": "Thursday",
+        "hours": "07:00-20:00"
+      },
+      {
+        "day": "Friday",
+        "hours": "07:00-20:00"
+      },
+      {
+        "day": "Saturday",
+        "hours": "07:00-20:00"
+      },
+      {
+        "day": "Sunday",
+        "hours": "07:00-20:00"
+      }
+    ],
+    "tags": [
+      "pharmacy",
+      "healthcare"
+    ],
+    "availableSlots": [
+      {
+        "date": "2024-09-16",
+        "slots": [
+          {
+            "time": "09:00",
+            "available": true
+          },
+          {
+            "time": "10:00",
+            "available": true
+          },
+          {
+            "time": "11:00",
+            "available": true
+          }
+        ]
+      },
+      {
+        "date": "2024-09-17",
+        "slots": [
+          {
+            "time": "09:00",
+            "available": true
+          },
+          {
+            "time": "10:00",
+            "available": true
+          },
+          {
+            "time": "11:00",
+            "available": true
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "id": "service1",
+        "name": "Consultation",
+        "duration": 30,
+        "price": 100
+      },
+      {
+        "id": "service2",
+        "name": "Medication",
+        "duration": 15,
+        "price": 50
+      }
+    ],
+    "doctors": [
+      {
+        "id": "doctor1",
+        "name": "John Doe",
+        "specialty": "General Practice",
+        "available": true
+      }
+    ],
+    "specialists": [
+      {
+        "id": "specialist1",
+        "name": "Jane Smith",
+        "specialty": "Cardiology",
+        "available": true
+      }
+    ],
+    "diagnosticTests": [
+      {
+        "id": "test1",
+        "name": "Blood Test",
+        "price": 200,
+        "turnaroundTime": "1 day"
+      }
+    ],
+    "medications": [
+      {
+        "id": "med1",
+        "name": "Paracetamol",
+        "price": 10,
+        "inStock": true
+      }
+    ]
+  },
+  {
+    "id": "801508972",
+    "name": "Mbale Epicentre Health Centre II",
+    "coordinates": [
+      34.1672732,
+      0.97075
+    ],
+    "type": "hospital",
+    "distance": "5 km",
+    "emoji": "🏥",
+    "address": "Mbale Tororo Road, Mbale",
+    "contactPhone": "0432123456",
+    "contactEmail": "mbaleepicentre@example.com",
+    "ratings": [
+      {
+        "userId": "user3",
+        "rating": 5,
+        "comment": "Excellent service",
+        "createdAt": "2022-02-01T00:00:00.000Z"
+      },
+      {
+        "userId": "user4",
+        "rating": 4,
+        "comment": "Good experience",
+        "createdAt": "2022-02-15T00:00:00.000Z"
+      }
+    ],
+    "averageRating": 4.5,
+    "totalRatings": 2,
+    "openingHours": [
+      {
+        "day": "Monday",
+        "hours": "08:00-18:00"
+      },
+      {
+        "day": "Tuesday",
+        "hours": "08:00-18:00"
+      },
+      {
+        "day": "Wednesday",
+        "hours": "08:00-18:00"
+      },
+      {
+        "day": "Thursday",
+        "hours": "08:00-18:00"
+      },
+      {
+        "day": "Friday",
+        "hours": "08:00-18:00"
+      },
+      {
+        "day": "Saturday",
+        "hours": "08:00-18:00"
+      },
+      {
+        "day": "Sunday",
+        "hours": "08:00-18:00"
+      }
+    ],
+    "tags": [
+      "hospital",
+      "healthcare"
+    ],
+    "availableSlots": [
+      {
+        "date": "2024-09-16",
+        "slots": [
+          {
+            "time": "09:00",
+            "available": true
+          },
+          {
+            "time": "10:00",
+            "available": true
+          },
+          {
+            "time": "11:00",
+            "available": true
+          }
+        ]
+      },
+      {
+        "date": "2024-09-17",
+        "slots": [
+          {
+            "time": "09:00",
+            "available": true
+          },
+          {
+            "time": "10:00",
+            "available": true
+          },
+          {
+            "time": "11:00",
+            "available": true
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "id": "service3",
+        "name": "Surgery",
+        "duration": 60,
+        "price": 500
+      },
+      {
+        "id": "service4",
+        "name": "Consultation",
+        "duration": 30,
+        "price": 100
+      }
+    ],
+    "doctors": [
+      {
+        "id": "doctor2",
+        "name": "Jane Doe",
+        "specialty": "General Surgery",
+        "available": true
+      }
+    ],
+    "specialists": [
+      {
+        "id": "specialist2",
+        "name": "Bob Smith",
+        "specialty": "Cardiology",
+        "available": true
+      }
+    ],
+    "diagnosticTests": [
+      {
+        "id": "test2",
+        "name": "X-ray",
+        "price": 300,
+        "turnaroundTime": "2 days"
+      }
+    ],
+    "medications": [
+      {
+        "id": "med2",
+        "name": "Ibuprofen",
+        "price": 15,
+        "inStock": true
+      }
+    ]
+  },
+  {
+    "id": "5639737531",
+    "name": "Ngruwe Health Centre",
+    "coordinates": [
+      30.7500733,
+      1.1965333
+    ],
+    "type": "clinic",
+    "distance": "15 km",
+    "emoji": "🏥",
+    "address": "Block 15, Kyangwali, Hoima",
+    "contactPhone": "0123456789",
+    "contactEmail": "ngruwehealthcentre@example.com",
+    "ratings": [
+      {
+        "userId": "user5",
+        "rating": 5,
+        "comment": "Excellent service",
+        "createdAt": "2022-03-01T00:00:00.000Z"
+      },
+      {
+        "userId": "user6",
+        "rating": 4,
+        "comment": "Good experience",
+        "createdAt": "2022-03-15T00:00:00.000Z"
+      }
+    ],
+    "averageRating": 4.5,
+    "totalRatings": 2,
+    "openingHours": [
+      {
+        "day": "Monday",
+        "hours": "07:00-20:00"
+      },
+      {
+        "day": "Tuesday",
+        "hours": "07:00-20:00"
+      },
+      {
+        "day": "Wednesday",
+        "hours": "07:00-20:00"
+      },
+      {
+        "day": "Thursday",
+        "hours": "07:00-20:00"
+      },
+      {
+        "day": "Friday",
+        "hours": "07:00-20:00"
+      },
+      {
+        "day": "Saturday",
+        "hours": "07:00-20:00"
+      },
+      {
+        "day": "Sunday",
+        "hours": "07:00-20:00"
+      }
+    ],
+    "tags": [
+      "clinic",
+      "healthcare"
+    ],
+    "availableSlots": [
+      {
+        "date": "2024-09-16",
+        "slots": [
+          {
+            "time": "09:00",
+            "available": true
+          },
+          {
+            "time": "10:00",
+            "available": true
+          },
+          {
+            "time": "11:00",
+            "available": true
+          }
+        ]
+      },
+      {
+        "date": "2024-09-17",
+        "slots": [
+          {
+            "time": "09:00",
+            "available": true
+          },
+          {
+            "time": "10:00",
+            "available": true
+          },
+          {
+            "time": "11:00",
+            "available": true
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "id": "service5",
+        "name": "Vaccination",
+        "duration": 15,
+        "price": 50
+      },
+      {
+        "id": "service6",
+        "name": "Consultation",
+        "duration": 30,
+        "price": 100
+      }
+    ],
+    "doctors": [
+      {
+        "id": "doctor3",
+        "name": "Alice Johnson",
+        "specialty": "Pediatrics",
+        "available": true
+      }
+    ],
+    "specialists": [
+      {
+        "id": "specialist3",
+        "name": "Mike Brown",
+        "specialty": "Dermatology",
+        "available": true
+      }
+    ],
+    "diagnosticTests": [
+      {
+        "id": "test3",
+        "name": "Blood Test",
+        "price": 200,
+        "turnaroundTime": "1 day"
+      }
+    ],
+    "medications": [
+      {
+        "id": "med3",
+        "name": "Paracetamol",
+        "price": 10,
+        "inStock": true
+      }
+    ]
+  },
+  {
+    "id": "5639737532",
+    "name": "John Ruvanga James Nyama Drug Shop",
+    "coordinates": [
+      30.7840286,
+      1.185362
+    ],
+    "type": "pharmacy",
+    "distance": "10 km",
+    "emoji": "🏥",
+    "address": "Block 01, Kyangwali, Hoima",
+    "contactPhone": "0123456789",
+    "contactEmail": "johnruvangajamesnyama@example.com",
+    "ratings": [
+      {
+        "userId": "user7",
+        "rating": 5,
+        "comment": "Excellent service",
+        "createdAt": "2022-04-01T00:00:00.000Z"
+      },
+      {
+        "userId": "user8",
+        "rating": 4,
+        "comment": "Good experience",
+        "createdAt": "2022-04-15T00:00:00.000Z"
+      }
+    ],
+    "averageRating": 4.5,
+    "totalRatings": 2,
+    "openingHours": [
+      {
+        "day": "Monday",
+        "hours": "07:00-20:00"
+      },
+      {
+        "day": "Tuesday",
+        "hours": "07:00-20:00"
+      },
+      {
+        "day": "Wednesday",
+        "hours": "07:00-20:00"
+      },
+      {
+        "day": "Thursday",
+        "hours": "07:00-20:00"
+      },
+      {
+        "day": "Friday",
+        "hours": "07:00-20:00"
+      },
+      {
+        "day": "Saturday",
+        "hours": "07:00-20:00"
+      },
+      {
+        "day": "Sunday",
+        "hours": "07:00-20:00"
+      }
+    ],
+    "tags": [
+      "pharmacy",
+      "healthcare"
+    ],
+    "availableSlots": [
+      {
+        "date": "2024-09-16",
+        "slots": [
+          {
+            "time": "09:00",
+            "available": true
+          },
+          {
+            "time": "10:00",
+            "available": true
+          },
+          {
+            "time": "11:00",
+            "available": true
+          }
+        ]
+      },
+      {
+        "date": "2024-09-17",
+        "slots": [
+          {
+            "time": "09:00",
+            "available": true
+          },
+          {
+            "time": "10:00",
+            "available": true
+          },
+          {
+            "time": "11:00",
+            "available": true
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "id": "service7",
+        "name": "Medication",
+        "duration": 15,
+        "price": 50
+      },
+      {
+        "id": "service8",
+        "name": "Consultation",
+        "duration": 30,
+        "price": 100
+      }
+    ],
+    "doctors": [
+      {
+        "id": "doctor4",
+        "name": "Emma Taylor",
+        "specialty": "General Practice",
+        "available": true
+      }
+    ],
+    "specialists": [
+      {
+        "id": "specialist4",
+        "name": "Oliver Lee",
+        "specialty": "Cardiology",
+        "available": true
+      }
+    ],
+    "diagnosticTests": [
+      {
+        "id": "test4",
+        "name": "X-ray",
+        "price": 300,
+        "turnaroundTime": "2 days"
+      }
+    ],
+    "medications": [
+      {
+        "id": "med4",
+        "name": "Ibuprofen",
+        "price": 15,
+        "inStock": true
+      }
+    ]
+  },
+  {
+    "id": "10583475412",
+    "name": "Parl Medical Clinic",
+    "coordinates": [
+      31.3393699,
+      1.4198698
+    ],
+    "type": "clinic",
+    "distance": "20 km",
+    "emoji": "🏥",
+    "address": "Busiisi West, Hoima",
+    "contactPhone": "0432123456",
+    "contactEmail": "parlmedicalclinic@example.com",
+    "ratings": [
+      {
+        "userId": "user9",
+        "rating": 5,
+        "comment": "Excellent service",
+        "createdAt": "2022-05-01T00:00:00.000Z"
+      },
+      {
+        "userId": "user10",
+        "rating": 4,
+        "comment": "Good experience",
+        "createdAt": "2022-05-15T00:00:00.000Z"
+      }
+    ],
+    "averageRating": 4.5,
+    "totalRatings": 2,
+    "openingHours": [
+      {
+        "day": "Monday",
+        "hours": "08:00-18:00"
+      },
+      {
+        "day": "Tuesday",
+        "hours": "08:00-18:00"
+      },
+      {
+        "day": "Wednesday",
+        "hours": "08:00-18:00"
+      },
+      {
+        "day": "Thursday",
+        "hours": "08:00-18:00"
+      },
+      {
+        "day": "Friday",
+        "hours": "08:00-18:00"
+      },
+      {
+        "day": "Saturday",
+        "hours": "08:00-18:00"
+      },
+      {
+        "day": "Sunday",
+        "hours": "08:00-18:00"
+      }
+    ],
+    "tags": [
+      "clinic",
+      "healthcare"
+    ],
+    "availableSlots": [
+      {
+        "date": "2024-09-16",
+        "slots": [
+          {
+            "time": "09:00",
+            "available": true
+          },
+          {
+            "time": "10:00",
+            "available": true
+          },
+          {
+            "time": "11:00",
+            "available": true
+          }
+        ]
+      },
+      {
+        "date": "2024-09-17",
+        "slots": [
+          {
+            "time": "09:00",
+            "available": true
+          },
+          {
+            "time": "10:00",
+            "available": true
+          },
+          {
+            "time": "11:00",
+            "available": true
+          }
+        ]
+      }
+    ],
+    "services": [
+      {
+        "id": "service9",
+        "name": "Surgery",
+        "duration": 60,
+        "price": 500
+      },
+      {
+        "id": "service10",
+        "name": "Consultation",
+        "duration": 30,
+        "price": 100
+      }
+    ],
+    "doctors": [
+      {
+        "id": "doctor5",
+        "name": "David Kim",
+        "specialty": "General Surgery",
+        "available": true
+      }
+    ],
+    "specialists": [
+      {
+        "id": "specialist5",
+        "name": "Sophia Patel",
+        "specialty": "Cardiology",
+        "available": true
+      }
+    ],
+    "diagnosticTests": [
+      {
+        "id": "test5",
+        "name": "Blood Test",
+        "price": 200,
+        "turnaroundTime": "1 day"
+      }
+    ],
+    "medications": [
+      {
+        "id": "med5",
+        "name": "Paracetamol",
+        "price": 10,
+        "inStock": true
+      }
+    ]
+  }
+]

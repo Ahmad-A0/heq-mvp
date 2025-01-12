@@ -1,3 +1,5 @@
+export type SHAServiceCategory = "Preventive and Promotive" | "Emergency, Chronic, and Critical" | "Curative" | "Rehabilitative" | "Palliative";
+
 export interface Rating {
     userId: string;
     rating: number;
@@ -6,8 +8,6 @@ export interface Rating {
 }
 
 export type FacilityLevel = 2 | 3 | 4 | 5 | 6;
-
-export type SHAServiceCategory = "Preventive and Promotive" | "Emergency, Chronic, and Critical" | "Curative" | "Rehabilitative" | "Palliative";
 
 export interface Facility {
     id: string;
@@ -98,3 +98,4 @@ export interface RatingSubmission {
     rating: number;
     comment?: string;
 }
+

@@ -23,23 +23,8 @@ export default function TabLayout() {
                 headerShown: false,
                 animation: 'shift',
             }}
-            initialRouteName="healthSavingsAccount"
+            initialRouteName="personalHealthVault"
         >
-            <Tabs.Screen
-                name="personalHealthVault"
-                options={{
-                    title: 'Vault',
-                    tabBarIcon: ({ color, focused }) => (
-                        <Vault
-                            size={24}
-                            color={color}
-                            style={tw`${
-                                focused ? 'opacity-100' : 'opacity-70'
-                            }`}
-                        />
-                    ),
-                }}
-            />
             <Tabs.Screen
                 name="healthSavingsAccount"
                 options={{
@@ -53,6 +38,24 @@ export default function TabLayout() {
                             }`}
                         />
                     ),
+                    lazy: true,
+                }}
+            />
+            <Tabs.Screen
+                name="personalHealthVault"
+                options={{
+                    title: 'Vault',
+                    tabBarIcon: ({ color, focused }) => (
+                        <Vault
+                            size={24}
+                            color={color}
+                            style={tw`${
+                                focused ? 'opacity-100' : 'opacity-70'
+                            }`}
+                        />
+                    ),
+                    // Don't lazy load the vault since it's our initial screen
+                    lazy: false,
                 }}
             />
             <Tabs.Screen
@@ -68,6 +71,7 @@ export default function TabLayout() {
                             }`}
                         />
                     ),
+                    lazy: true,
                 }}
             />
         </Tabs>
